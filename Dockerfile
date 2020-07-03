@@ -39,9 +39,9 @@ RUN sed -i "s/#include <filesystem>/#include <experimental\/filesystem>/g" /home
 	cd /home/airsim_ws/AirSim/ros &&\
 	/bin/bash -c "source /opt/ros/kinetic/setup.bash; catkin build" &&\
 	echo "source /home/airsim_ws/AirSim/ros/devel/setup.bash" >> ~/.bashrc
-##### When you run UE in Docker #####
-# RUN mkdir -p /root/Documents/AirSim &&\
-# 	cp /home/airsim_ws/AirSim/ros/src/airsim_tutorial_pkgs/settings/front_stereo_and_center_mono.json /root/Documents/AirSim/settings.json
+##### Setting json #####
+RUN mkdir -p /root/Documents/AirSim &&\
+	cp /home/airsim_ws/AirSim/ros/src/airsim_tutorial_pkgs/settings/front_stereo_and_center_mono.json /root/Documents/AirSim/settings.json
 ##### Script #####
 RUN echo "#!/bin/bash \n \
 		source /opt/ros/kinetic/setup.bash \n \
