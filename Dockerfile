@@ -11,13 +11,7 @@ RUN apt-get update && apt-get install -y \
 	unzip \
 	git
 ########## AirSim ##########
-RUN apt-get update &&\
-	apt-get install -y \
-		rsync \
-		g++-8 \
-		python-catkin-tools \
-		ros-kinetic-mavros* &&\
-	mkdir /home/airsim_ws/ &&\
+RUN	mkdir /home/airsim_ws/ &&\
 	cd /home/airsim_ws/ &&\
 	git clone https://github.com/Microsoft/AirSim.git &&\
 	cd AirSim &&\
@@ -30,7 +24,17 @@ RUN mkdir /home/cmake_ws &&\
 	wget https://github.com/Kitware/CMake/releases/download/v3.17.3/cmake-3.17.3.tar.gz &&\
 	tar xvf cmake-3.17.3.tar.gz &&\
 	cd cmake-3.17.3 &&\
-	./bootstrap && make && make install
+	./bootstrap && \
+	make -j $(nproc --all) && \
+	make install
+##### Requirement #####
+RUN apt-get update &&\
+	apt-get install -y \
+		rsync \
+		g++-8 \
+		python-catkin-tools \
+		ros-kinetic-tf2-sensor-msgs \
+		ros-kinetic-mavros*
 ##### Build #####
 RUN sed -i "s/#include <filesystem>/#include <experimental\/filesystem>/g" /home/airsim_ws/AirSim/MavLinkCom/MavLinkTest/Commands.cpp &&\
 	sed -i "s/using namespace std::filesystem;/using namespace std::experimental::filesystem;/g" /home/airsim_ws/AirSim/MavLinkCom/MavLinkTest/Commands.cpp &&\
