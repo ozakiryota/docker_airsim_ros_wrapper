@@ -50,7 +50,7 @@ Visualization Manager:
           Value: true
         world_ned:
           Value: true
-      Marker Scale: 1
+      Marker Scale: 100
       Name: TF
       Show Arrows: true
       Show Axes: true

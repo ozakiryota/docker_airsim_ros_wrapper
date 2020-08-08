@@ -4,13 +4,18 @@ FROM osrf/ros:kinetic-desktop-full
 LABEL com.nvidia.volumes.needed="nvidia_driver"
 ENV PATH /usr/local/nvidia/bin:${PATH}
 ENV LD_LIBRARY_PATH /usr/local/nvidia/lib:/usr/local/nvidia/lib64:${LD_LIBRARY_PATH}
-########## basis ##########
+########## BASIS ##########
 RUN apt-get update && apt-get install -y \
 	vim \
 	wget \
 	unzip \
 	git
 ########## AirSim ##########
+##### Requirement #####
+# RUN apt-get update &&\
+# 	apt-get install -y \
+# 		rsync
+##### Build #####
 RUN	mkdir /home/airsim_ws/ &&\
 	cd /home/airsim_ws/ &&\
 	git clone https://github.com/Microsoft/AirSim.git &&\
@@ -30,7 +35,6 @@ RUN mkdir /home/cmake_ws &&\
 ##### Requirement #####
 RUN apt-get update &&\
 	apt-get install -y \
-		rsync \
 		g++-8 \
 		python-catkin-tools \
 		ros-kinetic-tf2-sensor-msgs \
@@ -53,5 +57,5 @@ RUN echo "#!/bin/bash \n \
 		roslaunch airsim_ros_pkgs airsim_node.launch" \
 		>> /home/airsim_ws/airsim_node.sh &&\
 	chmod +x /home/airsim_ws/airsim_node.sh
-######### initial position ##########
+######### Initial position ##########
 WORKDIR /home/airsim_ws
