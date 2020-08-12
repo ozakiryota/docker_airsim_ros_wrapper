@@ -8,5 +8,5 @@ fi
 echo $1
 roscore & \
 sleep 1s &&\
-rosbag play $1 & \
-rviz -d ../rviz_config/drone_1cam.rviz
+rosbag play $1 --clock & \
+rviz -d ../rviz_config/drone_1cam_lidar.rviz
