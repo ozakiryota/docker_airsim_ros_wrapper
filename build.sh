@@ -1,6 +1,7 @@
 #!/bin/bash
 
-path_name=$(pwd)
-image_name=${path_name##*/}
+image="airsim_ros_wrapper"
+tag="latest"
 
-docker build -t $image_name:latest .
+docker build . \
+    -t $image:$tag
