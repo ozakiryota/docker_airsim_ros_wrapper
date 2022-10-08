@@ -17,6 +17,8 @@ RUN apt-get update && \
 		ros-noetic-tf2-sensor-msgs \
 		ros-noetic-tf2-geometry-msgs \
 		ros-noetic-mavros*
+## cache busting
+ARG CACHEBUST=1
 ## build
 RUN	cd ~/ && \
 	git clone https://github.com/Microsoft/AirSim.git && \
